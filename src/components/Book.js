@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import propTypes from 'prop-types';
 import { shelves } from '../screens/HomeScreen';
 
 const Book = ({ book, changeShelf, changeShelfForSearch }) => {
@@ -51,6 +52,12 @@ const Book = ({ book, changeShelf, changeShelfForSearch }) => {
       </div>
     </li>
   );
+};
+
+Book.propTypes = {
+  book: propTypes.object.isRequired,
+  changeShelf: propTypes.func.isRequired,
+  changeShelfForSearch: propTypes.func,
 };
 
 export default memo(Book);
