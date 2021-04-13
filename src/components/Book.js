@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { shelves } from '../screens/HomeScreen';
 
-const Book = ({ book, changeShelf }) => {
+const Book = ({ book, changeShelf, changeShelfForSearch }) => {
   return (
     <li>
       <div className="book">
@@ -17,7 +17,12 @@ const Book = ({ book, changeShelf }) => {
           <div className="book-shelf-changer">
             <select
               value={book.shelf}
-              onChange={e => changeShelf(book, e.target.value)}
+              onChange={e => {
+                changeShelf(book, e.target.value);
+                if (changeShelfForSearch) {
+                  changeShelfForSearch(book.id, e.target.value);
+                }
+              }}
             >
               <option value="move" disabled>
                 Move to...
@@ -42,4 +47,4 @@ const Book = ({ book, changeShelf }) => {
   );
 };
 
-export default Book;
+export default memo(Book);

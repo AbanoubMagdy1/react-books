@@ -1,7 +1,7 @@
 import React from 'react';
 import Book from './Book';
 
-const BookShelf = ({ text, books, changeShelf, remove }) => {
+const BookShelf = ({ text, books, changeShelf, changeShelfForSearch }) => {
   return (
     <div className="bookshelf">
       <h2 className="bookshelf-title">{text}</h2>
@@ -12,7 +12,7 @@ const BookShelf = ({ text, books, changeShelf, remove }) => {
               key={book.id}
               book={book}
               changeShelf={changeShelf}
-              remove={remove}
+              changeShelfForSearch={changeShelfForSearch}
             />
           ))}
         </ol>

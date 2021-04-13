@@ -2,28 +2,30 @@ import React from 'react';
 import HomeScreen from './screens/HomeScreen';
 import SearchScreen from './screens/SearchScreen';
 import { Route } from 'react-router-dom';
-import * as BooksAPI from './BooksAPI';
+import { getAll, update } from './BooksAPI';
 import './App.css';
 
 class BooksApp extends React.Component {
   state = { books: [] };
 
   componentDidMount() {
-    BooksAPI.getAll().then(data => {
+    getAll().then(data => {
       this.setState({ books: data });
     });
   }
 
   changeShelf = (book, shelf) => {
-    console.log(book);
-    BooksAPI.update(book, shelf).then(() => {
+    update(book, shelf).then(() => {
       this.setState(curState => ({
-        books: curState.books.map(b => {
-          if (b.id === book.id) {
-            b.shelf = shelf;
-          }
-          return b;
-        }),
+        books:
+          book.shelf === 'none'
+            ? [...curState.books, { ...book, shelf }]
+            : curState.books.map(b => {
+                if (b.id === book.id) {
+                  b.shelf = shelf;
+                }
+                return b;
+              }),
       }));
     });
   };
@@ -41,7 +43,15 @@ class BooksApp extends React.Component {
             />
           )}
         />
-        <Route path="/search" render={() => <SearchScreen />} />
+        <Route
+          path="/search"
+          render={() => (
+            <SearchScreen
+              changeShelf={this.changeShelf}
+              books={this.state.books}
+            />
+          )}
+        />
       </div>
     );
   }
