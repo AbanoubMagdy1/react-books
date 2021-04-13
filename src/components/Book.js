@@ -1,6 +1,7 @@
 import React from 'react';
+import { shelves } from '../screens/HomeScreen';
 
-const Book = ({ book }) => {
+const Book = ({ book, changeShelf }) => {
   return (
     <li>
       <div className="book">
@@ -14,13 +15,22 @@ const Book = ({ book }) => {
             }}
           />
           <div className="book-shelf-changer">
-            <select>
+            <select
+              value={book.shelf}
+              onChange={e => changeShelf(book, e.target.value)}
+            >
               <option value="move" disabled>
                 Move to...
               </option>
-              <option value="currentlyReading">Currently Reading</option>
-              <option value="wantToRead">Want to Read</option>
-              <option value="read">Read</option>
+              {shelves.map(shelf => (
+                <option
+                  key={shelf.shelf}
+                  value={shelf.shelf}
+                  disabled={shelf.shelf === book.shelf}
+                >
+                  {shelf.text}
+                </option>
+              ))}
               <option value="none">None</option>
             </select>
           </div>

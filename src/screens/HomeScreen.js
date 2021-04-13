@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import BookShelf from '../components/BookShelf';
 import { Link } from 'react-router-dom';
 
-const shleves = [
+export const shelves = [
   { shelf: 'currentlyReading', text: 'Currently Reading' },
   { shelf: 'wantToRead', text: 'Want To Read' },
   { shelf: 'read', text: 'Read' },
@@ -17,8 +17,10 @@ class HomeScreen extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            {shleves.map(shelf => (
+            {shelves.map(shelf => (
               <BookShelf
+                key={shelf.shelf}
+                changeShelf={this.props.changeShelf}
                 text={shelf.text}
                 books={this.props.books.filter(
                   book => book.shelf === shelf.shelf
