@@ -54,8 +54,8 @@ class SearchScreen extends Component {
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <Link to="/">
-            <button className="close-search">Close</button>
+          <Link className="close-search" to="/">
+            Close
           </Link>
           <div className="search-books-input-wrapper">
             {/*

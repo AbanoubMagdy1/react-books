@@ -11,16 +11,20 @@ const Book = ({ book, changeShelf, changeShelfForSearch }) => {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: `url(${book.imageLinks.smallThumbnail})`,
+              backgroundImage: `url(${
+                book.imageLinks && book.imageLinks.smallThumbnail
+                  ? book.imageLinks.smallThumbnail
+                  : '/imgs/bookCover.jpg'
+              })`,
             }}
           />
           <div className="book-shelf-changer">
             <select
               value={book.shelf}
-              onChange={e => {
-                changeShelf(book, e.target.value);
+              onChange={({ target }) => {
+                changeShelf(book, target.value);
                 if (changeShelfForSearch) {
-                  changeShelfForSearch(book.id, e.target.value);
+                  changeShelfForSearch(book.id, target.value);
                 }
               }}
             >
@@ -41,7 +45,9 @@ const Book = ({ book, changeShelf, changeShelfForSearch }) => {
           </div>
         </div>
         <div className="book-title">{book.title}</div>
-        <div className="book-authors">{book.authors.join(', ')}</div>
+        <div className="book-authors">
+          {book.authors ? book.authors.join(', ') : ''}
+        </div>
       </div>
     </li>
   );

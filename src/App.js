@@ -8,10 +8,9 @@ import './App.css';
 class BooksApp extends React.Component {
   state = { books: [] };
 
-  componentDidMount() {
-    getAll().then(data => {
-      this.setState({ books: data });
-    });
+  async componentDidMount() {
+    const books = await getAll();
+    this.setState({ books });
   }
 
   changeShelf = (book, shelf) => {
