@@ -22,9 +22,10 @@ class BooksApp extends React.Component {
             ? [...curState.books, { ...book, shelf }]
             : curState.books.map(b => {
                 if (b.id === book.id) {
-                  b.shelf = shelf;
+                  return { ...b, shelf };
+                } else {
+                  return b;
                 }
-                return b;
               }),
       }));
     });
