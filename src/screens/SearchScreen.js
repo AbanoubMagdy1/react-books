@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import BookShelf from '../components/BookShelf';
-import debounce from '../utils.js/debounce';
+import debounce from '../utils/debounce';
 import { search } from '../BooksAPI';
 
 import { Link } from 'react-router-dom';
